@@ -1,0 +1,37 @@
+.left {
+    width: 100px;
+    position: fixed;
+    height: 100vh;
+    text-align: center;
+    background: white;
+    box-shadow: 5px 5px 5px 0px rgba(77, 76, 76, 0.3);
+    .menu {
+        &-item {
+            padding: 13px 0;
+            a {
+                color: rgba(0,0,0,.54);
+                &:hover {
+                    color: #2db84c;
+                }
+            }
+            
+            &.active {
+                p {
+                    color: #2db84c;
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+                transition: 0.5s ease-in-out;
+                color: rgb(68, 67, 67);
+            }
+
+            p {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

@@ -1,8 +1,11 @@
 import './App.scss';
+import DefaultLayout from './Layouts/Default';
+import TransactionPage from './pages/transaction';
 function App() {
   return (
-    <div>Hello
-    </div>
+    <DefaultLayout>
+        <TransactionPage></TransactionPage>
+    </DefaultLayout>
   );
 }
 

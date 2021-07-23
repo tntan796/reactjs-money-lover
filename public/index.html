@@ -39,5 +39,48 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Hiển thị sidebar
+          const menuIcons = document.querySelectorAll('.menu-icon');
+          const sideBar = document.querySelector('.sidebar');
+          menuIcons.forEach(menu => {
+              menu.addEventListener('click', function () {
+                  if (sideBar.classList.contains('active')) {
+                      sideBar.classList.remove('active');
+                  } else {
+                      sideBar.classList.add('active');
+                  }
+              })
+          })
+
+
+          // // Xử lí khi click vào xem danh sách ví (ẩn khi click ra ngoài, hiện khi click vào tên)
+          window.addEventListener('click', function(e){  
+              if (e.target == document.querySelector('.wallet-name') || e.target == document.querySelector('.wallet-name img')) {
+                  document.getElementById('wallets').classList.add('active');
+              } else {
+                  document.getElementById('wallets').classList.remove('active');
+              }
+          });
+
+          // Xử lí hiển thị transaction detail
+          const mainLeft = document.querySelector('.main-left');
+          const mainRight = document.querySelector('.main-right');
+          const transactionDetails = document.querySelectorAll('.transaction-detail .item');
+          const closeDetail = document.querySelector('.close-detail');
+          transactionDetails.forEach(transaction => {
+              transaction.addEventListener('click', function(e) {
+                  mainLeft.classList.add('active');
+                  mainRight.classList.add('active');
+              });
+          })
+
+          closeDetail.addEventListener('click', function(e) {
+              mainRight.classList.remove('active');
+              mainLeft.classList.remove('active');
+          })
+      })
+  </script>
   </body>
 </html>
