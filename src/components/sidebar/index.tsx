@@ -1,5 +1,54 @@
+import { Link } from 'react-router-dom';
 import './index.scss';
+
+interface SideBar {
+    name: string;
+    icon: string;
+    alt: string;
+    path: string;
+}
+
 function SideBarComponent() {
+
+    const sideBars: SideBar[] = [
+        {
+            name: 'Quản lý tài khoản',
+            icon: './assets/person.svg',
+            alt: 'person',
+            path: 'manage-account'
+        },
+        {
+            name: 'Ví của tôi',
+            icon: './assets/wallet.svg',
+            alt: 'wallet',
+            path: 'my-wallet'
+        },
+        {
+            name: 'Nhóm',
+            icon: './assets/package.svg',
+            alt: 'wallet',
+            path: 'my-wallet'
+        },
+        {
+            name: 'Liên kết ngân hàng',
+            icon: './assets/link.svg',
+            alt: 'link',
+            path: 'bank-link'
+        }
+    ]
+
+    const sideBarElm = sideBars.map((sidebar, index) => (
+        <li key = {index}>
+            <Link to={sidebar.path}>
+                <img src={sidebar.icon} alt={sidebar.alt} className="icon" />
+                <div className="menu-info">
+                    <label>{sidebar.name}</label>
+                    <img src="./assets/right-chevron.svg" alt="chevron" className="chevron" />
+                </div>
+            </Link>
+        </li>
+    ));
+
     return (
         <div className="sidebar">
             <div className="menu-action">
@@ -17,42 +66,7 @@ function SideBarComponent() {
                 </div>
             </div>
             <ul className="menu-list">
-                <li>
-                    <a href="/quan-li-tai-khoan.html">
-                        <img src="./assets/person.svg" alt="person" className="icon" />
-                        <div className="menu-info">
-                            <label>Quản lý tài khoản</label>
-                            <img src="./assets/right-chevron.svg" alt="chevron" className="chevron" />
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="./vi-cua-toi.html">
-                        <img src="./assets/wallet.svg" alt="wallet" className="icon" />
-                        <div className="menu-info">
-                            <label>Ví của tôi</label>
-                            <img src="./assets/right-chevron.svg" alt="chevron" className="chevron" />
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/nhom.html">
-                        <img src="./assets/package.svg" alt="package" className="icon" />
-                        <div className="menu-info">
-                            <label>Nhóm</label>
-                            <img src="./assets/right-chevron.svg" alt="chevron" className="chevron" />
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/lien-ket-ngan-hang.html">
-                        <img src="./assets/link.svg" alt="link" className="icon" />
-                        <div className="menu-info">
-                            <label>Liên kết ngân hàng</label>
-                            <img src="./assets/right-chevron.svg" alt="chevron" className="chevron" />
-                        </div>
-                    </a>
-                </li>
+                {sideBarElm}
             </ul>
         </div>
     )

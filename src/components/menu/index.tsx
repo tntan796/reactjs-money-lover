@@ -1,6 +1,87 @@
 import './index.scss';
+import {
+  Link, useRouteMatch
+} from "react-router-dom";
+
+interface MenuType {
+  name: string;
+  icon: string;
+  alt: string;
+  path: string;
+  extend: boolean;
+}
 
 function MenuComponent() {
+
+
+  const menus: MenuType[] = [
+    {
+      name: 'Sổ giao dịch',
+      icon: './assets/transaction.svg',
+      alt: 'transaction',
+      path: '/transaction',
+      extend: false
+    },
+    {
+      name: 'Báo cáo',
+      icon: './assets/report.svg',
+      alt: 'report',
+      path: '/report',
+      extend: false
+    },
+    {
+      name: 'Ngân sách',
+      icon: './assets/budget.svg',
+      alt: 'budget',
+      path: '/budget',
+      extend: false
+    },
+    {
+      name: 'Cửa hàng',
+      icon: './assets/cart.svg',
+      alt: 'market',
+      path: '/market',
+      extend: true
+    },
+    {
+      name: 'Trợ giúp',
+      icon: './assets/help.svg',
+      alt: 'help',
+      path: '/help',
+      extend: true
+    }
+  ];
+
+  const menuElm = menus.map((menu, index) => (
+    <MyCustomLink
+        key = {index}
+        name = {menu.name}
+        path = {menu.path}
+        icon = {menu.icon}
+        alt = {menu.alt}
+        extend = {menu.extend}
+    ></MyCustomLink>
+  ))
+
+  function MyCustomLink({ name, path, icon, alt, activeOnlyWhenExact = true, extend = false}: any) {
+    let match = useRouteMatch({
+      path: path,
+      exact: activeOnlyWhenExact
+    });
+  
+    return (
+      <li className="menu-item">
+        <Link className={match ? "menu-item active" : "menu-item"} to={path}>
+          <img src={icon} alt={alt} />
+          <p>
+              {name}
+              {extend ? <img src="./assets/extend.svg" alt="extend"/> : null }
+          </p>
+        </Link>
+      </li>
+    );
+  }
+
   return (
     <>
       <div className="left">
@@ -8,42 +89,7 @@ function MenuComponent() {
           <li className="menu-item">
             <img src="./assets/menu.svg" alt="menu" className="menu-icon" />
           </li>
-          <li className="menu-item active">
-            <a href="/index.html">
-              <img src="./assets/transaction.svg" alt="transaction" />
-              <p>Sổ giao dịch</p>
-            </a>
-          </li>
-          <li className="menu-item">
-            <a href="/bao-cao.html">
-              <img src="./assets/report.svg" alt="report" />
-              <p>Báo cáo</p>
-            </a>
-          </li>
-          <li className="menu-item">
-            <a href="/ngan-sach.html">
-              <img src="./assets/budget.svg" alt="budget" />
-              <p>Ngân sách</p>
-            </a>
-          </li>
-          <li className="menu-item">
-            <a href="/cua-hang.html">
-              <img src="./assets/cart.svg" alt="cart" />
-              <p>
-                Cửa hàng
-                <img src="./assets/extend.svg" alt="extend" />
-              </p>
-            </a>
-          </li>
-          <li className="menu-item">
-            <a href="/tro-giup.html">
-              <img src="./assets/help.svg" alt="help" />
-              <p>
-                Trợ giúp
-                <img src="./assets/extend.svg" alt="extend" />
-              </p>
-            </a>
-          </li>
+          {menuElm}
         </ul>
       </div>
     </>
