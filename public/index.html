@@ -41,31 +41,20 @@
     -->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-
-        // Hiển thị sidebar
-          // const menuIcons = document.querySelectorAll('.menu-icon');
-          // const sideBar = document.querySelector('.sidebar');
-          // menuIcons.forEach(menu => {
-          //     menu.addEventListener('click', function () {
-          //         if (sideBar.classList.contains('active')) {
-          //             sideBar.classList.remove('active');
-          //         } else {
-          //             sideBar.classList.add('active');
-          //         }
-          //     })
-          // })
-
-
           // // Xử lí khi click vào xem danh sách ví (ẩn khi click ra ngoài, hiện khi click vào tên)
+          const walletName = document.querySelector('.wallet-name');
+          const wallet = document.getElementById('wallets');
           window.addEventListener('click', function(e){  
-            document.getElementById('wallets').classList.remove('active');
+            if (wallet) {
+              wallet.classList.remove('active');
+            }
           });
 
+
           // Mở khi click wallet
-          const wallet = document.querySelector('.wallet-name');
-          if (wallet) {
-            wallet.addEventListener('click', function(e) {
-            document.getElementById('wallets').classList.add('active');
+          if (walletName) {
+            walletName.addEventListener('click', function(e) {
+            wallet.classList.add('active');
             e.stopPropagation();
           });
           }
