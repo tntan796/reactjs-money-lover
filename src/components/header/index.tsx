@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import './index.scss';
-function HeaderComponent() {
+
+function HeaderComponent(props: any) {
     return (
         <div className="header-wrapper">
             <div className="header-left">
@@ -53,6 +55,9 @@ function HeaderComponent() {
                     </div>
                 </div>
             </div>
+            <div className="header-center">
+                {props.center}
+            </div>
             <div className="header-right">
                 <div className="method">
                     <div className="method-item">
@@ -65,7 +70,7 @@ function HeaderComponent() {
                         <img src="./assets/search.svg" alt="search" />
                     </div>
                     <div className="method-item">
-                        <a href="/them-moi.html" className="btn btn-add-transaction">Thêm giao dịch</a>
+                        <Link to="/transaction/add" className="btn btn-add-transaction">Thêm giao dịch</Link>
                     </div>
                 </div>
             </div>

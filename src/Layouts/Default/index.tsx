@@ -1,4 +1,3 @@
-import HeaderComponent from "../../components/header";
 import MenuComponent from "../../components/menu";
 import SideBarComponent from "../../components/sidebar";
 import './index.scss';
@@ -11,10 +10,7 @@ function DefaultLayout(props: any) {
                 <MenuComponent></MenuComponent>
                 <div className="right">
                     <div className="right-wrapper">
-                        <HeaderComponent></HeaderComponent>
-                        <div className="main">
-                            {props.children}
-                        </div>
+                        {props.children}
                     </div>
                 </div>
             </div>

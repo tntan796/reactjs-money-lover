@@ -1,7 +1,11 @@
-.main {
+.transaction {
     display: flex;
     padding: 30px;
     justify-content: center;
+
+    &.active {
+        justify-content: space-between;
+    }
 
     &-left {
         margin-right: 10px;
@@ -9,7 +13,6 @@
         background: white;
         box-shadow: 0 0 10px rgb(146, 146, 146);
         border-radius: 5px;
-
 
         .date-range-wrapper {
             list-style: none;

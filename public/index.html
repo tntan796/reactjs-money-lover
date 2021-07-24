@@ -41,6 +41,7 @@
     -->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
+
         // Hiển thị sidebar
           const menuIcons = document.querySelectorAll('.menu-icon');
           const sideBar = document.querySelector('.sidebar');
@@ -57,30 +58,27 @@
 
           // // Xử lí khi click vào xem danh sách ví (ẩn khi click ra ngoài, hiện khi click vào tên)
           window.addEventListener('click', function(e){  
-              if (e.target == document.querySelector('.wallet-name') || e.target == document.querySelector('.wallet-name img')) {
-                  document.getElementById('wallets').classList.add('active');
-              } else {
-                  document.getElementById('wallets').classList.remove('active');
-              }
+            document.getElementById('wallets').classList.remove('active');
+          });
+          // Mở khi click wallet
+          document.querySelector('.wallet-name').addEventListener('click', function(e) {
+            document.getElementById('wallets').classList.add('active');
+            e.stopPropagation();
           });
 
-          // Xử lí hiển thị transaction detail
-          const mainLeft = document.querySelector('.main-left');
-          const mainRight = document.querySelector('.main-right');
-          const transactionDetails = document.querySelectorAll('.transaction-detail .item');
-          const closeDetail = document.querySelector('.close-detail');
-          transactionDetails.forEach(transaction => {
-              transaction.addEventListener('click', function(e) {
-                  mainLeft.classList.add('active');
-                  mainRight.classList.add('active');
-              });
-          })
-
-          closeDetail.addEventListener('click', function(e) {
-              mainRight.classList.remove('active');
-              mainLeft.classList.remove('active');
+          // Xử lí dropdown
+          const dropdownMenu = document.querySelectorAll('.dropdown-menu');
+          dropdownMenu.forEach(menu => {
+              menu.addEventListener('click', function() {
+                  if (this.querySelector('.dropdown-body').classList.contains('active')) {
+                      this.querySelector('.dropdown-body').classList.remove('active')
+                  } else {
+                      this.querySelector('.dropdown-body').classList.add('active')
+                  }
+              })
           })
       })
+      
   </script>
   </body>
 </html>
