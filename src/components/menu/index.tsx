@@ -2,7 +2,9 @@ import './index.scss';
 import {
   Link, useRouteMatch
 } from "react-router-dom";
-
+import { Sidebar } from 'primereact/sidebar';
+import { useState } from 'react';
+import SideBarComponent from '../sidebar';
 interface MenuType {
   name: string;
   icon: string;
@@ -12,8 +14,7 @@ interface MenuType {
 }
 
 function MenuComponent() {
-
-
+  const [visibleLeft, setVisibleLeft] = useState(false);
   const menus: MenuType[] = [
     {
       name: 'Sổ giao dịch',
@@ -87,11 +88,14 @@ function MenuComponent() {
       <div className="left">
         <ul className="menu-list">
           <li className="menu-item">
-            <img src="./assets/menu.svg" alt="menu" className="menu-icon" />
+            <img src="./assets/menu.svg" alt="menu" className="menu-icon"  onClick={() => setVisibleLeft(true)}/>
           </li>
           {menuElm}
         </ul>
       </div>
+      <Sidebar visible={visibleLeft} onHide={() => setVisibleLeft(false)} style={{width:'370px'}}>
+          <SideBarComponent closeSideBar = {() => setVisibleLeft(false)}></SideBarComponent>
+      </Sidebar>
     </>
   );
 }

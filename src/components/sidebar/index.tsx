@@ -8,7 +8,7 @@ interface SideBar {
     path: string;
 }
 
-function SideBarComponent() {
+function SideBarComponent(props: any) {
 
     const sideBars: SideBar[] = [
         {
@@ -39,7 +39,7 @@ function SideBarComponent() {
 
     const sideBarElm = sideBars.map((sidebar, index) => (
         <li key = {index}>
-            <Link to={sidebar.path}>
+            <Link to={sidebar.path} onClick = {() => props.closeSideBar()}>
                 <img src={sidebar.icon} alt={sidebar.alt} className="icon" />
                 <div className="menu-info">
                     <label>{sidebar.name}</label>
@@ -51,9 +51,6 @@ function SideBarComponent() {
 
     return (
         <div className="sidebar">
-            <div className="menu-action">
-                <img src="./assets/menu.svg" alt="menu" className="menu-icon" />
-            </div>
             <div className="account-wrapper">
                 <div className="logo">
                     <img src="./assets/badge.svg" alt="badge" />

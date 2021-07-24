@@ -6,7 +6,6 @@ function DefaultLayout(props: any) {
     return (
         <div className="container">
             <div className="container-wrapper">
-                <SideBarComponent></SideBarComponent>
                 <MenuComponent></MenuComponent>
                 <div className="right">
                     <div className="right-wrapper">

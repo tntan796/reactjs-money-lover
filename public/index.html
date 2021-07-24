@@ -43,28 +43,33 @@
       document.addEventListener("DOMContentLoaded", function() {
 
         // Hiển thị sidebar
-          const menuIcons = document.querySelectorAll('.menu-icon');
-          const sideBar = document.querySelector('.sidebar');
-          menuIcons.forEach(menu => {
-              menu.addEventListener('click', function () {
-                  if (sideBar.classList.contains('active')) {
-                      sideBar.classList.remove('active');
-                  } else {
-                      sideBar.classList.add('active');
-                  }
-              })
-          })
+          // const menuIcons = document.querySelectorAll('.menu-icon');
+          // const sideBar = document.querySelector('.sidebar');
+          // menuIcons.forEach(menu => {
+          //     menu.addEventListener('click', function () {
+          //         if (sideBar.classList.contains('active')) {
+          //             sideBar.classList.remove('active');
+          //         } else {
+          //             sideBar.classList.add('active');
+          //         }
+          //     })
+          // })
 
 
           // // Xử lí khi click vào xem danh sách ví (ẩn khi click ra ngoài, hiện khi click vào tên)
           window.addEventListener('click', function(e){  
             document.getElementById('wallets').classList.remove('active');
           });
+
           // Mở khi click wallet
-          document.querySelector('.wallet-name').addEventListener('click', function(e) {
+          const wallet = document.querySelector('.wallet-name');
+          if (wallet) {
+            wallet.addEventListener('click', function(e) {
             document.getElementById('wallets').classList.add('active');
             e.stopPropagation();
           });
+          }
+         
 
           // Xử lí dropdown
           const dropdownMenu = document.querySelectorAll('.dropdown-menu');
