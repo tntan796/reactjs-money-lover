@@ -3,8 +3,11 @@
     padding: 25px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-   
+    justify-content: center;
+
+    &.active {
+        justify-content: space-between;
+    }
 
     &-left {
         width: 40%;
@@ -55,6 +58,10 @@
         position: relative;
         z-index: 500;
         overflow-x: hidden;
+        display: none;
+        &.active {
+            display: block;
+        }
 
         .header {
             display: flex;
@@ -66,6 +73,10 @@
                 display: flex;
                 align-items: center;
 
+                img {
+                    cursor: pointer;
+                }
+                
                 p {
                     margin-left: 20px;
                     font-weight: bold;

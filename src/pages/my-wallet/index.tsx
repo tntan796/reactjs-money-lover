@@ -162,12 +162,14 @@ function MyWallet() {
         }
     }
 
+    const [isShowDetail, setIsShowDetail] = useState(false);
+
     return (
         <>
-            <div className="my-wallet">
+            <div className={isShowDetail ? "my-wallet active" : "my-wallet"}>
                 <div className="my-wallet-left">
                     <div className="wallet-list">
-                        <div className="wallet-item">
+                        <div className="wallet-item" onClick = {() => setIsShowDetail(true)}>
                             <div className="title">Tính vào tổng</div>
                             <div className="wallet-item--content">
                                 <img src="./assets/wallet.svg" alt="wallet" />
@@ -177,9 +179,9 @@ function MyWallet() {
                                 </div>
                             </div>
                         </div>
-                        <div className="wallet-item">
+                        <div className="wallet-item" onClick = {() => setIsShowDetail(true)}>
                             <div className="title">Tính vào tổng</div>
-                            <div className="wallet-item--content active">
+                            <div className="wallet-item--content">
                                 <img src="./assets/wallet.svg" alt="wallet" />
                                 <div>
                                     <div>Tiền cũ</div>
@@ -189,10 +191,10 @@ function MyWallet() {
                         </div>
                     </div>
                 </div>
-                <div className="my-wallet-right">
+                <div className={isShowDetail ? "my-wallet-right active" : "my-wallet-right"}>
                     <div className="header">
                         <div className="header-left">
-                            <img src="./assets/close.svg" alt="close" />
+                            <img src="./assets/close.svg" alt="close"  onClick = {() => setIsShowDetail(false)}/>
                             <p>Chi tiết</p>
                         </div>
                         <div className="header-right">

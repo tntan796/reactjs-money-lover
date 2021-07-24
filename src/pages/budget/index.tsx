@@ -32,11 +32,11 @@ function BudgetPage() {
                             </div>
                             <div className="buget-content" onClick={() => setIsShowDetail(true)}>
                                 <div className="content-image">
-                                    <img src="./assets/items/icon12.png" alt="" />
+                                    <img src="./assets/items/icon_2.png" alt="" />
                                 </div>
                                 <div className="content-body">
                                     <div className="content-title">
-                                        <div>Bạn bè &amp; người yêu</div>
+                                        <div>Ăn uống</div>
                                         <div>
                                             <div>10,000</div>
                                             <div>Còn lại 9,999</div>
@@ -70,11 +70,11 @@ function BudgetPage() {
                             </div>
                             <div className="buget-content" onClick={() => setIsShowDetail(true)}>
                                 <div className="content-image">
-                                    <img src="./assets/items/icon12.png" alt="" />
+                                    <img src="./assets/items/icon_3.png" alt="" />
                                 </div>
                                 <div className="content-body">
                                     <div className="content-title">
-                                        <div>Bạn bè &amp; người yêu</div>
+                                        <div>Đi lại</div>
                                         <div>
                                             <div>10,000</div>
                                             <div>Còn lại 9,999</div>
@@ -119,11 +119,11 @@ function BudgetPage() {
                     </div>
                     <div className="detail-content">
                         <div className="detail-icon">
-                            <img src="./assets/items/icon12.png" alt="" />
+                            <img src="./assets/items/icon_5.png" alt="" />
                         </div>
                         <div className="detail-info">
                             <div className="bugdet-name">
-                                Bạn bè &amp; người yêu
+                                Mua sắm
                             </div>
                             <div className="name-account">
                                 Tiền của Tano
