@@ -103,10 +103,6 @@ function BudgetPage() {
                             </div>
                         </TabPanel>
                     </TabView>
-
-
-
-                    
                 </div>
                 <div className={isShowDetail ? "budget-right active" : "budget-right"}>
                     <div className="header">

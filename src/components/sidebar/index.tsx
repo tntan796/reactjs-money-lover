@@ -27,7 +27,7 @@ function SideBarComponent(props: any) {
             name: 'Nhóm',
             icon: './assets/package.svg',
             alt: 'wallet',
-            path: 'my-wallet'
+            path: 'package'
         },
         {
             name: 'Liên kết ngân hàng',
