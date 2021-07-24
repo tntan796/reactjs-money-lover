@@ -14,16 +14,12 @@ import PackagePage from './pages/package';
 import MyWallet from './pages/my-wallet';
 import ManageAccountPage from './pages/manage-account';
 import BankLink from './pages/bank-link';
-import AddTransaction from './pages/transaction/add-transaction';
 
 function App() {
   return (
     <Router>
       <DefaultLayout>
           <Switch>
-          <Route path="/transaction/add">
-            <AddTransaction></AddTransaction>
-          </Route>
           <Route path="/transaction">
             <TransactionPage></TransactionPage>
           </Route>

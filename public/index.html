@@ -58,19 +58,6 @@
             e.stopPropagation();
           });
           }
-         
-
-          // Xử lí dropdown
-          const dropdownMenu = document.querySelectorAll('.dropdown-menu');
-          dropdownMenu.forEach(menu => {
-              menu.addEventListener('click', function() {
-                  if (this.querySelector('.dropdown-body').classList.contains('active')) {
-                      this.querySelector('.dropdown-body').classList.remove('active')
-                  } else {
-                      this.querySelector('.dropdown-body').classList.add('active')
-                  }
-              })
-          })
       })
       
   </script>

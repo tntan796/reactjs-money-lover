@@ -3,7 +3,6 @@ import HeaderComponent from '../../components/header';
 import ReportHeaderCenterComponent from '../../components/report-header/center';
 import './index.scss';
 import { Chart } from 'primereact/chart';
-import { TabMenu } from 'primereact/tabmenu';
 function ReportPage() {
 
     const [isShowDetail, setIsShowDetail] = useState(false);

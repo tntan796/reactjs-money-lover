@@ -59,20 +59,7 @@ function HeaderComponent(props: any) {
                 {props.center}
             </div>
             <div className="header-right">
-                <div className="method">
-                    <div className="method-item">
-                        <img src="./assets/date.svg" alt="date" />
-                    </div>
-                    <div className="method-item">
-                        <img src="./assets/time.svg" alt="time" />
-                    </div>
-                    <div className="method-item">
-                        <img src="./assets/search.svg" alt="search" />
-                    </div>
-                    <div className="method-item">
-                        <Link to="/transaction/add" className="btn btn-add-transaction">Thêm giao dịch</Link>
-                    </div>
-                </div>
+                {props.right}
             </div>
         </div>
     );
