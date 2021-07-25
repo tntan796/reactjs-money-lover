@@ -299,7 +299,7 @@ function TransactionPage() {
                                 <div className="p-sm-12 p-md-4">
                                     <div className="form-input-group image">
                                         <span>Ảnh</span>
-                                        <span>Thả các tập tin đính kèm <a href="#">Tại đây</a> </span>
+                                        <span>Thả các tập tin đính kèm <a href="!#">Tại đây</a> </span>
                                         <span>Định dạng tập tin hình ảnh JPG, JPGE, PNG, GIF</span>
                                         <span>Hình ảnh có dung lượng nhỏ hơn 2MB</span>
                                     </div>

@@ -3,29 +3,22 @@ import axios from 'axios';
 import CONSTANTS from '../common/constants';
 // Set up default config for http requests here
 // Please have a look at here `https://github.com/axios/axios#request- config` for the full list of configs
-const instance = axios.create({
+const axiosInstance = axios.create({
     baseURL: CONSTANTS.BASE_API,
     // paramsSerializer: (params) => queryString.stringify(params),
-    headers: {
-        Authorization:
-            'Basic bW9iaWxlX3N1bnNoaW5ldHZfYXBwX3Byb2Q6RldTdVlOWHluY2VjZDgyeA==',
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
 });
 
-instance.interceptors.request.use(async (config) => {
-    const token = sessionStorage.getItem('token');
+axiosInstance.interceptors.request.use(async (config) => {
+    const token = sessionStorage.getItem(CONSTANTS.TOKEN);
     if (token) {
         config.headers = {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`
         };
     }
-
     return config;
 });
 
-instance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
     (response) => {
         return response;
     },
@@ -39,4 +32,4 @@ instance.interceptors.response.use(
     },
 );
 
-export default instance;
+export default axiosInstance;

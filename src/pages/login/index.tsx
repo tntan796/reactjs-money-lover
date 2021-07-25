@@ -4,7 +4,7 @@ import authService from '../../services/auth.service';
 import { useEffect, useState } from 'react';
 import CONSTANTS from '../../common/constants';
 function LoginPage() {
-    let history = useHistory()
+    let history = useHistory();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 

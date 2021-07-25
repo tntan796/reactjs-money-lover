@@ -1,5 +1,4 @@
 import MenuComponent from "../../components/menu";
-import SideBarComponent from "../../components/sidebar";
 import './index.scss';
 
 function DefaultLayout(props: any) {

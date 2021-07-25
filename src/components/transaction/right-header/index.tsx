@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function TransactionRightHeader(props: any) {
     return (
         <div className="method">

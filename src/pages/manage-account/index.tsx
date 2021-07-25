@@ -6,7 +6,7 @@ function ManageAccountPage() {
                 <div className="manage-account-header">
                     <img src="./assets/close.svg" alt="close" className="icon-close" />
                     <h2>Quản lý tài khoản</h2>
-                    <a href="#" className="btn btn-logout">Đăng xuất</a>
+                    <a href="!#" className="btn btn-logout">Đăng xuất</a>
                 </div>
                 <div className="manage-account-account">
                     <div className="level">

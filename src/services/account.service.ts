@@ -1,9 +1,10 @@
-import axios from "axios";
-const API_URL = "http://localhost:8080/api/auth/";
+import axiosInstance from "./axios.service";
+import CONSTANTS from "../common/constants";
+import AccountModel from "../models/account.model";
 
 class AccountService {
-  async login(username: string, password: string) {
-    const response = await axios.post(API_URL + "signin", { username, password });
+  register(account: AccountModel) {
+    return axiosInstance.post(`${CONSTANTS.BASE_API}/Account/SetAccountUser`, account)
   }
 }
 
