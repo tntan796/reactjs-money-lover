@@ -15,6 +15,7 @@ function LoginPage() {
       }
     }, [])
 
+    // Kiểm tra đăng nhập thành công thì chuyển về trang main
     const handleLogin = async (e: any) => {
         try {
             e.preventDefault();

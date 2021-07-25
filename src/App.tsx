@@ -3,7 +3,8 @@ import DefaultLayout from './Layouts/Default';
 import TransactionPage from './pages/transaction';
 import {
   Switch,
-  Route
+  Route,
+  useHistory
 } from "react-router-dom";
 import ReportPage from './pages/report';
 import BudgetPage from './pages/budget';
@@ -13,8 +14,19 @@ import PackagePage from './pages/package';
 import MyWallet from './pages/my-wallet';
 import ManageAccountPage from './pages/manage-account';
 import BankLink from './pages/bank-link';
+import { useEffect } from 'react';
+import CONSTANTS from './common/constants';
 
 function App() {
+  const history = useHistory();
+
+  // Kiểm tra nếu chưa đăng nhập thì chuyển về trang login
+  useEffect(() => {
+    if (!sessionStorage.getItem(CONSTANTS.TOKEN)) {
+      history.push('/login');
+    }
+  }, []);
+
   return (
       <DefaultLayout>
           <Switch>
