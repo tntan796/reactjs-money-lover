@@ -1,4 +1,4 @@
-.Register {
+.register {
     box-sizing: border-box;
     font-family: sans-serif, Arial, Helvetica, sans-serif;
     margin: 0;
@@ -21,11 +21,15 @@
             margin-bottom: 34px;
         }
 
-        .login {
+        .create {
             display: flex;
             justify-content: center;
             color: #707070;
 
+            &-description {
+                margin-bottom: 1rem;
+            }
+            
             &-wrapper {
                 background-color: white;
                 box-shadow: 0 0 5px gray;
@@ -47,7 +51,7 @@
             &-left {
                 flex: 1;
 
-                .login-social {
+                .create-social {
                     display: flex;
                     flex-direction: column;
                     border-right: 2px solid rgb(223, 218, 218);
@@ -100,13 +104,15 @@
                 flex-direction: column;
 
                 input {
-                    border: none;
-                    font-size: 14px;
-                    padding: 10px 5px;
-                    margin: 10px 0px;
+                    // border: none;
+                    // font-size: 14px;
+                    // padding: 10px 5px;
+                    // margin: 10px 0px;
+                    width: 100%;
                 }
 
                 .forgot-password {
+                    margin-top: 1rem;
                     text-align: right;
                     a {
                         color: #00bc2a;
@@ -116,7 +122,7 @@
                     }
                 }
 
-                .login-button {
+                .create-button {
                     padding:10px 0px;
                     margin: 10px 0px;
                     background: #00bc2a;
@@ -128,7 +134,7 @@
                     font-weight: bold;
                 }
 
-                .register {
+                .create-account {
                     a {
                         color: #00bc2a;
                         &:hover {
@@ -142,7 +148,7 @@
 }
 
 @media only screen and (max-width: 767px) {
-    .Register {
+    .register {
         &-wrapper {
             .logo {
                 display: flex;
@@ -155,7 +161,7 @@
                 }
             }
 
-            .login {
+            .create {
                 &-contain {
                     padding: 40px;
                     padding-top: 0px;
@@ -164,7 +170,7 @@
                 }
 
                 &-left {
-                    .login-social {
+                    .create-social {
                         border-right: none;
                         border-bottom: 2px solid rgb(223, 218, 218);
                         padding-bottom: 20px;

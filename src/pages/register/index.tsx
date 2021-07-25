@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
 import './index.scss';
+import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
 function RegisterPage() {
     return (
-        <div className="Register">
-            <div className="Register-wrapper">
+        <div className="register">
+            <div className="register-wrapper">
                 <div className="logo">
                     <img src="./assets/dang-nhap/logo.svg" alt="logo" />
                 </div>
-                <div className="login">
-                    <form className="login-wrapper">
-                        <h1 className="login-title">Register</h1>
-                        <div className="login-contain">
-                            <div className="login-left">
-                                <p className="login-description">Using social networking accounts</p>
-                                <div className="login-social">
+                <div className="create">
+                    <form className="create-wrapper">
+                        <h1 className="create-title">Register</h1>
+                        <div className="create-contain">
+                            <div className="create-left">
+                                <p className="create-description">Using social networking accounts</p>
+                                <div className="create-social">
                                     <a className="btn btn-google" href="#">
                                         <svg id="Group_818" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="social-item-icon"><g id="Group_862" data-name="Group 862"><rect id="Rectangle_326" data-name="Rectangle 326" width={24} height={24} fill="none" /><path id="Path_3814" data-name="Path 3814" d="M261.529,3012.3a5.143,5.143,0,0,1,3.551,1.34l2.592-2.481a8.919,8.919,0,0,0-6.143-2.339,9.2,9.2,0,0,0-8.2,4.959l2.969,2.26a5.54,5.54,0,0,1,5.231-3.739" transform="translate(-249.345 -3005.818)" fill="#ff3e3e" fillRule="evenodd" /><path id="Path_3815" data-name="Path 3815" d="M270.345,3018.018a7.545,7.545,0,0,0-.194-1.84h-8.622v3.34h5.061a4.388,4.388,0,0,1-1.878,2.92l2.9,2.2a8.712,8.712,0,0,0,2.733-6.62" transform="translate(-249.345 -3005.818)" fill="#3b8aff" fillRule="evenodd" /><path id="Path_3816" data-name="Path 3816" d="M256.3,3019.6a5.423,5.423,0,0,1-.306-1.78,5.712,5.712,0,0,1,.3-1.781l-2.969-2.259a8.817,8.817,0,0,0,0,8.08Z" transform="translate(-249.345 -3005.818)" fill="#ffce12" fillRule="evenodd" /><path id="Path_3817" data-name="Path 3817" d="M261.529,3026.818a8.858,8.858,0,0,0,6.081-2.18l-2.9-2.2a5.677,5.677,0,0,1-8.408-2.84l-2.969,2.26a9.182,9.182,0,0,0,8.2,4.96" transform="translate(-249.345 -3005.818)" fill="#27b648" fillRule="evenodd" /></g></svg>
                                         <span>Connect with Google</span>
@@ -28,15 +30,44 @@ function RegisterPage() {
                                     </a>
                                 </div>
                             </div>
-                            <div className="login-right">
-                                <p className="login-description">Using Money Lover account</p>
-                                <input type="text" className="email" placeholder="Email" />
-                                <input type="password" className="password" placeholder="Password" />
+                            <div className="create-right">
+                                <p className="create-description">Using Money Lover account</p>
+                                <br/>
+                                <div className="p-field p-col-12">
+                                    <span className="p-float-label">
+                                        <InputText id="inputtext" />
+                                        <label htmlFor="inputtext">User Name</label>
+                                    </span>
+                                </div>
+                                <div className="p-field p-col-12">
+                                    <span className="p-float-label">
+                                        <Password inputId="password" style = {{width: "100%"}}/>
+                                        <label htmlFor="password">Password</label>
+                                    </span>
+                                </div>
+                                <div className="p-field p-col-12">
+                                    <span className="p-float-label">
+                                        <InputText id="inputtext" />
+                                        <label htmlFor="inputtext">Name</label>
+                                    </span>
+                                </div>
+                                <div className="p-field p-col-12">
+                                    <span className="p-float-label">
+                                        <InputText id="inputtext" />
+                                        <label htmlFor="inputtext">Email</label>
+                                    </span>
+                                </div>
+                                <div className="p-field p-col-12">
+                                    <span className="p-float-label">
+                                        <InputText id="inputtext" />
+                                        <label htmlFor="inputtext">Phone</label>
+                                    </span>
+                                </div>
                                 <span className="forgot-password">
-                                    <Link to = "/forgot-password">Forgot Password</Link>
-                                </span>
-                                <button type="submit" className="btn login-button">Register</button>
-                                <p className="register"> Have you an account?
+                                        <Link to = "/forgot-password">Forgot Password</Link>
+                                    </span>
+                                <button type="submit" className="btn create-button">Register</button>
+                                <p className="create-account"> Have you an account?
                                     <Link to="/login"> Sign In</Link>
                                 </p>
                             </div>
