@@ -2,7 +2,6 @@ import './App.scss';
 import DefaultLayout from './Layouts/Default';
 import TransactionPage from './pages/transaction';
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -17,7 +16,6 @@ import BankLink from './pages/bank-link';
 
 function App() {
   return (
-    <Router>
       <DefaultLayout>
           <Switch>
           <Route path="/transaction">
@@ -52,7 +50,6 @@ function App() {
           </Route>
         </Switch>
       </DefaultLayout>
-    </Router>
   );
 }
 

@@ -7,9 +7,37 @@ import 'primereact/resources/themes/saga-green/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
+import ForgotPasswordPage from './pages/forgot-password';
+import LogoutPage from './pages/logout';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/logout">
+          <LogoutPage />
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotPasswordPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage></LoginPage>
+        </Route>
+        <Route path="/register">
+          <RegisterPage></RegisterPage>
+        </Route>
+        <Route path="/" exact>
+          <App />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
