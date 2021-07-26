@@ -1,12 +1,21 @@
 import './index.scss';
+import authService from '../../services/auth.service';
+import { useHistory } from 'react-router-dom';
 function ManageAccountPage() {
+    const history = useHistory();
+
+    const logout  = () => {
+        authService.logout();
+        history.push('/login');
+    }
+
     return (
         <>
             <div className="manage-account">
                 <div className="manage-account-header">
                     <img src="./assets/close.svg" alt="close" className="icon-close" />
                     <h2>Quản lý tài khoản</h2>
-                    <a href="!#" className="btn btn-logout">Đăng xuất</a>
+                    <div onClick = {() => logout()} className="btn btn-logout">Đăng xuất</div>
                 </div>
                 <div className="manage-account-account">
                     <div className="level">

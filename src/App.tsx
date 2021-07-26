@@ -16,6 +16,7 @@ import ManageAccountPage from './pages/manage-account';
 import BankLink from './pages/bank-link';
 import { useEffect } from 'react';
 import CONSTANTS from './common/constants';
+import NotFoundPage from './pages/not-found';
 
 function App() {
   const history = useHistory();
@@ -30,6 +31,7 @@ function App() {
   return (
       <DefaultLayout>
           <Switch>
+       
           <Route path="/transaction">
             <TransactionPage></TransactionPage>
           </Route>
@@ -58,7 +60,10 @@ function App() {
             <BankLink></BankLink>
           </Route>
           <Route path="/" exact>
-          <TransactionPage></TransactionPage>
+            <TransactionPage></TransactionPage>
+          </Route>
+          <Route>
+              <NotFoundPage></NotFoundPage>
           </Route>
         </Switch>
       </DefaultLayout>

@@ -24,6 +24,10 @@
             &-info {
                 padding-left:20px;
                 position: relative;
+                cursor: pointer;
+                label {
+                    cursor: pointer;
+                }
             }
             &-name {
                 cursor: pointer;

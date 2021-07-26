@@ -33,7 +33,7 @@ ReactDOM.render(
         <Route path="/register">
           <RegisterPage></RegisterPage>
         </Route>
-        <Route path="/" exact>
+        <Route path="" exact>
           <App />
         </Route>
       </Switch>

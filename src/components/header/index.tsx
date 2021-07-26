@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import './index.scss';
 
 function HeaderComponent(props: any) {
+
+    const [isShowWallet, setIsShowWallet] = useState(false);
+
     return (
         <div className="header-wrapper">
             <div className="header-left">
@@ -8,7 +12,7 @@ function HeaderComponent(props: any) {
                     <div className="wallet-image">
                         <img src="./assets/wallet.png" alt="wallet" />
                     </div>
-                    <div className="wallet-info">
+                    <div className="wallet-info" onClick = {() => setIsShowWallet(!isShowWallet)}>
                         <div className="wallet-name">
                             Tiền của Tano
                             <img src="./assets/down-chevron.svg" alt="" />
@@ -16,11 +20,11 @@ function HeaderComponent(props: any) {
                         <div className="wallet-amount">
                             328,412,895
                         </div>
-                        <div className="wallet-list" id="wallets">
+                        <div className={isShowWallet ? "wallet-list active" : "wallet-list"} id="wallets">
                             <div className="wallet-item title">
                                 <span>Chọn ví</span>
                             </div>
-                            <div className="wallet-item detail">
+                            <div className="wallet-item detail" onClick = {() => setIsShowWallet(false)}>
                                 <img src="./assets/global.png" alt="global" />
                                 <div>
                                     <div className="wallet-item--name">Tổng cộng</div>
@@ -30,7 +34,7 @@ function HeaderComponent(props: any) {
                             <div className="wallet-item">
                                 <span>Tính vào tổng</span>
                             </div>
-                            <div className="wallet-item detail">
+                            <div className="wallet-item detail" onClick = {() => setIsShowWallet(false)}>
                                 <img src="./assets/wallet.png" alt="wallet" />
                                 <div>
                                     <div className="wallet-item--name">Tiền cũ</div>
@@ -40,7 +44,7 @@ function HeaderComponent(props: any) {
                             <div className="wallet-item">
                                 <span>Không tính vào tổng</span>
                             </div>
-                            <div className="wallet-item detail">
+                            <div className="wallet-item detail" onClick = {() => setIsShowWallet(false)}>
                                 <img src="./assets/wallet.png" alt="wallet" />
                                 <div className="wallet-item--active">
                                     <span>
