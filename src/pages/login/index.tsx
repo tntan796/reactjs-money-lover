@@ -65,7 +65,7 @@ function LoginPage() {
                                     <Link to = "/forgot-password">Forgot Password</Link>
                                 </span>
                                 <button type="submit" className="btn login-button">Login</button>
-                                <p className="register">Don't have an account
+                                <p className="register-link">Don't have an account
                                     <Link to="/register"> Register</Link>
                                 </p>
                             </div>
