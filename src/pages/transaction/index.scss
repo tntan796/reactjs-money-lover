@@ -303,55 +303,6 @@
             color: rgba(0,0,0,.87);
         }
 
-        .form-input-group {
-            border: 1px solid rgb(204, 200, 200);
-            border-radius: 5px;
-            padding: 5px;
-            line-height: 20px;
-            height: 70px;
-            box-sizing: border-box;
-            cursor: pointer;
-
-            label {
-                padding-bottom: 5px;
-                font-size: 12px;
-            }
-
-            &.image {
-                height: 100%;
-            }
-
-            .right-chevron {
-                width: 15px;
-                height: 15px;
-            }
-
-            .select-item {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-                &--icon {
-                    flex: 1;
-                    height: 20px;
-                    width: 20px;
-                }
-
-                &--right {
-                     flex: 3;
-                     display: flex;
-                     justify-content: space-between;
-                     align-items: center;
-                }
-
-                input {
-                    width: 100%;
-                    border: none;
-                    padding:3px 0px;
-                }
-            }
-        }
-
         .not-include-report {
             display: flex;
             padding: 20px 0px;

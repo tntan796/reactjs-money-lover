@@ -9,6 +9,8 @@ import { RadioButton } from 'primereact/radiobutton';
 import PackageModel from '../../models/package.model';
 import packageService from '../../services/package.service';
 import { Toast } from 'primereact/toast';
+import CustomDropdown from '../../components/custom-dropdown';
+import DataDropdownItem from '../../models/dropdown-item.model';
 
 function PackagePage() {
 
@@ -18,7 +20,8 @@ function PackagePage() {
     const [packageModel, setPackageModel] = useState(new PackageModel());
     const [packageList, setPackageList] = useState<PackageModel[]>([]);
     const [field, setField] = useState('');
-
+    const [selectedWallet, setSelectedWallet] = useState(null);
+    const [wallets, setWallets] = useState<DataDropdownItem[]>([]);
     const toast: any = useRef(null);
 
     const convertToTree = (data: PackageModel[]): PackageModel[] => {
@@ -27,6 +30,15 @@ function PackagePage() {
             return item;
         });
     }
+
+    useEffect(() => {
+        setWallets(
+            [
+                { Id: 0, Name: 'Tiền cũ', Icon: 'wallet.png', Description: '025' },
+                { Id: 1, Name: 'Tiền của Tano', Icon: 'wallet.png', Description: '54687' }
+            ]
+        );
+    })
 
     const fetchData = () => {
         packageService.getPackages().then(response => {
@@ -42,7 +54,7 @@ function PackagePage() {
     }, [])
 
     const chooseIcon = (value: string) => {
-        setPackageModel({...packageModel, [field]: value})
+        setPackageModel({ ...packageModel, [field]: value })
         setIsChooseIcon(false);
     }
 
@@ -127,17 +139,17 @@ function PackagePage() {
                     <div className="p-grid">
                         <div className="p-col-12">
                             <span>
-                                <RadioButton inputId="income" name="IsIncome" value={true} onChange={(e) => setPackageModel({...packageModel, IsIncome: false})} checked={packageModel.IsIncome} />
+                                <RadioButton inputId="income" name="IsIncome" value={true} onChange={(e) => setPackageModel({ ...packageModel, IsIncome: false })} checked={packageModel.IsIncome} />
                                 <label htmlFor="income"> Khoản thu</label>
                             </span>
                             <span className="p-ml-2">
-                                <RadioButton inputId="outcome" name="IsIncome" value={false} onChange={(e) => setPackageModel({...packageModel, IsIncome: false})} checked={!packageModel.IsIncome} />
+                                <RadioButton inputId="outcome" name="IsIncome" value={false} onChange={(e) => setPackageModel({ ...packageModel, IsIncome: false })} checked={!packageModel.IsIncome} />
                                 <label htmlFor="outcome"> Khoản chi</label>
                             </span>
                         </div>
                         <div className="p-col-3">
-                            <div className="icon-wrapper group" onClick = {() => {setIsChooseIcon(true); setField('Icon')}}>
-                                <img src = {`./assets/${packageModel.Icon}`} alt = {packageModel.Id + ""} className="icon" />
+                            <div className="icon-wrapper group" onClick={() => { setIsChooseIcon(true); setField('Icon') }}>
+                                <img src={`./assets/${packageModel.Icon}`} alt={packageModel.Id + ""} className="icon" />
                                 <img src="./assets/right-chevron.svg" alt="icon" className="chevron-right" />
                             </div>
                         </div>
@@ -148,20 +160,32 @@ function PackagePage() {
                             </div>
                         </div>
                         <div className="p-col-6">
-                            <div className="wallet group">
-                                <p>Ví</p>
-                                <div className="wallet-info">
-                                    <img src="./assets/items/icon_2.png" alt="icon" />
-                                    <label>Tiền của Tano</label>
+                            <div className="form-input-group">
+                                <label>Ví</label>
+                                <div className="select-item">
+                                    <CustomDropdown
+                                        value={selectedWallet}
+                                        options={wallets}
+                                        action={setSelectedWallet}
+                                        filterBy="Name"
+                                        optionLabel="Name"
+                                        placeholder="Chọn ví"
+                                    />
                                 </div>
                             </div>
                         </div>
                         <div className="p-col-6">
-                            <div className="parent group">
-                                <p>Nhóm cha</p>
-                                <div className="wallet-info">
-                                    <img src="./assets/items/icon_2.png" alt="icon" />
-                                    <label>Tiền của Tano</label>
+                            <div className="form-input-group">
+                                <label>Nhóm</label>
+                                <div className="select-item">
+                                    <CustomDropdown
+                                        value={selectedWallet}
+                                        options={wallets}
+                                        action={setSelectedWallet}
+                                        filterBy="Name"
+                                        optionLabel="Name"
+                                        placeholder="Chọn ví"
+                                    />
                                 </div>
                             </div>
                         </div>

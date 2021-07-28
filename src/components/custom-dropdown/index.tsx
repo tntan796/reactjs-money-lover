@@ -16,7 +16,7 @@ function CustomDropdown(props: DropdownProps) {
     const optionTemplate = (option: DataDropdownItem) => {
         return (
             <div className="dropdown-item">
-                <img alt={option?.Name} src={`./assets/${option?.Icon}`} className={`flag flag-${option?.Id + ''}`} />
+                {option?.Icon ? <img alt={option?.Name} src={`./assets/${option?.Icon}`} className={`flag flag-${option?.Id + ''}`} /> : null }
                 <div className = "dropdown-detail">
                     <div className = "wallet-name">{option?.Name}</div>
                     <div className = "wallet-amount">{option?.Description}</div>
@@ -30,7 +30,7 @@ function CustomDropdown(props: DropdownProps) {
         if (option) {
             return (
                 <div className="dropdown-item selected">
-                    <img alt={option?.Name} src={`./assets/${option?.Icon}`} />
+                    {option?.Icon ? <img alt={option?.Name} src={`./assets/${option?.Icon}`} /> : null}
                     <div className = "wallet-name">{option?.Name}</div>
                 </div>
             );

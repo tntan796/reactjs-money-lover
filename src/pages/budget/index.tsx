@@ -1,98 +1,132 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './index.scss';
 import { Dialog } from 'primereact/dialog';
-import { TabView,TabPanel } from 'primereact/tabview';
-
+import { TabView, TabPanel } from 'primereact/tabview';
+import HeaderComponent from '../../components/header';
+import CustomDropdown from '../../components/custom-dropdown';
+import DataDropdownItem from '../../models/dropdown-item.model';
+import { Button } from 'primereact/button';
 function BudgetPage() {
     const [isShowDetail, setIsShowDetail] = useState(false);
     const [isShowDialog, setIsShowDialog] = useState(false);
+    const [isShowForm, setIsShowForm] = useState(false);
+    const [wallets, setWallets] = useState<DataDropdownItem[]>([]);
+    const [selectedWallet, setSelectedWallet] = useState(null);
+    const [dateRanges, setDateRanges] = useState<DataDropdownItem[]>([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    useEffect(() => {
+        setWallets(
+            [
+                { Id: 0, Name: 'Tiền cũ', Icon: 'wallet.png', Description: '025' },
+                { Id: 1, Name: 'Tiền của Tano', Icon: 'wallet.png', Description: '54687' }
+            ]
+        );
+        setDateRanges(
+            [
+                { Id: 0, Name: 'Tuần này', Icon: '', Description: '26/07/2021 - 01/08/2021' },
+                { Id: 0, Name: 'Tháng này', Icon: '', Description: '01/07/2021 - 30-09-2021' },
+                { Id: 0, Name: 'Quý này', Icon: '', Description: '01/07/2021 - 30/09/2021' },
+                { Id: 0, Name: 'Năm nay', Icon: '', Description: '01/01/2021 - 31/12/2021' },
+                { Id: 0, Name: 'Tuần này', Icon: '', Description: '26/07/2021 - 01/08/2021' }
+            ]
+        );
+    }, []);
+
     return (
         <>
+            <HeaderComponent
+                center={null}
+                right={
+                    <Button label="Thêm ngân sách" onClick={() => setIsShowForm(true)} />
+                }
+            ></HeaderComponent>
+
             <div className={isShowDetail ? "budget active" : "budget"}>
                 <div className="budget-left">
                     <TabView className="tabview-custom">
                         <TabPanel header="Đang áp dụng">
-                        <div className="buget-list">
-                        <div className="buget-item">
-                            <div className="buget-date">
-                                <div className="date-time">
-                                    <div className="date-range">
-                                        01/07/2021 - 31/07/2021
-                                    </div>
-                                    <div className="date-remain">
-                                        Còn 13 ngày
-                                    </div>
-                                </div>
-                                <div className="date-amount">
-                                    <div className="amount">10,000</div>
-                                    <div className="amount-remain">
-                                        Còn lại 9,999
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="buget-content" onClick={() => setIsShowDetail(true)}>
-                                <div className="content-image">
-                                    <img src="./assets/items/icon_2.png" alt="" />
-                                </div>
-                                <div className="content-body">
-                                    <div className="content-title">
-                                        <div>Ăn uống</div>
-                                        <div>
-                                            <div>10,000</div>
-                                            <div>Còn lại 9,999</div>
+                            <div className="buget-list">
+                                <div className="buget-item">
+                                    <div className="buget-date">
+                                        <div className="date-time">
+                                            <div className="date-range">
+                                                01/07/2021 - 31/07/2021
+                                            </div>
+                                            <div className="date-remain">
+                                                Còn 13 ngày
+                                            </div>
+                                        </div>
+                                        <div className="date-amount">
+                                            <div className="amount">10,000</div>
+                                            <div className="amount-remain">
+                                                Còn lại 9,999
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="content-time-line">
-                                        <div className="time-line" />
-                                        <div className="today">
-                                            today
+                                    <div className="buget-content" onClick={() => setIsShowDetail(true)}>
+                                        <div className="content-image">
+                                            <img src="./assets/items/icon_2.png" alt="" />
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="buget-item">
-                            <div className="buget-date">
-                                <div className="date-time">
-                                    <div className="date-range">
-                                        01/07/2021 - 31/07/2021
-                                    </div>
-                                    <div className="date-remain">
-                                        Còn 13 ngày
-                                    </div>
-                                </div>
-                                <div className="date-amount">
-                                    <div className="amount">10,000</div>
-                                    <div className="amount-remain">
-                                        Còn lại 9,999
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="buget-content" onClick={() => setIsShowDetail(true)}>
-                                <div className="content-image">
-                                    <img src="./assets/items/icon_3.png" alt="" />
-                                </div>
-                                <div className="content-body">
-                                    <div className="content-title">
-                                        <div>Đi lại</div>
-                                        <div>
-                                            <div>10,000</div>
-                                            <div>Còn lại 9,999</div>
-                                        </div>
-                                    </div>
-                                    <div className="content-time-line">
-                                        <div className="time-line" />
-                                        <div className="today">
-                                            today
+                                        <div className="content-body">
+                                            <div className="content-title">
+                                                <div>Ăn uống</div>
+                                                <div>
+                                                    <div>10,000</div>
+                                                    <div>Còn lại 9,999</div>
+                                                </div>
+                                            </div>
+                                            <div className="content-time-line">
+                                                <div className="time-line" />
+                                                <div className="today">
+                                                    today
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div className="buget-item">
+                                    <div className="buget-date">
+                                        <div className="date-time">
+                                            <div className="date-range">
+                                                01/07/2021 - 31/07/2021
+                                            </div>
+                                            <div className="date-remain">
+                                                Còn 13 ngày
+                                            </div>
+                                        </div>
+                                        <div className="date-amount">
+                                            <div className="amount">10,000</div>
+                                            <div className="amount-remain">
+                                                Còn lại 9,999
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="buget-content" onClick={() => setIsShowDetail(true)}>
+                                        <div className="content-image">
+                                            <img src="./assets/items/icon_3.png" alt="" />
+                                        </div>
+                                        <div className="content-body">
+                                            <div className="content-title">
+                                                <div>Đi lại</div>
+                                                <div>
+                                                    <div>10,000</div>
+                                                    <div>Còn lại 9,999</div>
+                                                </div>
+                                            </div>
+                                            <div className="content-time-line">
+                                                <div className="time-line" />
+                                                <div className="today">
+                                                    today
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a className="add-more">
+                                    Thêm ngân sách tất cả các khoản cho giai đoạn này
+                                </a>
                             </div>
-                        </div>
-                        <a className="add-more">
-                            Thêm ngân sách tất cả các khoản cho giai đoạn này
-                        </a>
-                    </div>
                         </TabPanel>
                         <TabPanel header="Đã kết thúc">
                             <div className="transaction-empty">
@@ -165,8 +199,71 @@ function BudgetPage() {
                     </div>
                 </div>
 
-                <Dialog header="Mua sắm" visible={isShowDialog} style={{ width: '50vw' }} onHide={() => setIsShowDialog(false)}>
+                <Dialog header="Thêm" visible={isShowForm} style={{ width: '40vw' }} onHide={() => setIsShowForm(false)}>
+                    <div className="buget-form">
+                        <div className="p-grid">
+                            <div className="p-col-6">
+                                <div className="form-input-group">
+                                    <label>Ví</label>
+                                    <div className="select-item">
+                                        <CustomDropdown
+                                            value={selectedWallet}
+                                            options={wallets}
+                                            action={setSelectedWallet}
+                                            filterBy="Name"
+                                            optionLabel="Name"
+                                            placeholder="Chọn ví"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-col-6">
+                                <div className="form-input-group">
+                                    <label>Nhóm</label>
+                                    <div className="select-item">
+                                        <CustomDropdown
+                                            value={selectedWallet}
+                                            options={wallets}
+                                            action={setSelectedWallet}
+                                            filterBy="Name"
+                                            optionLabel="Name"
+                                            placeholder="Chọn nhóm"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-col-6">
+                                <div className="form-input-group">
+                                    <label>Số tiền</label>
+                                    <div className="select-item">
+                                        <input type="number" defaultValue={0} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-col-6">
+                                <div className="form-input-group">
+                                    <label>Ngày</label>
+                                    <div className="select-item">
+                                        <CustomDropdown
+                                            value={selectedDate}
+                                            options={dateRanges}
+                                            action={setSelectedDate}
+                                            filterBy="Name"
+                                            optionLabel="Name"
+                                            placeholder="Chọn ngày"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-col-12 text-align-right">
+                            <Button label="Hủy" className="p-button-text" />
+                            <Button label="Lưu" />
+                            </div>
+                        </div>
+                    </div>
+                </Dialog>
 
+                <Dialog header="Mua sắm" visible={isShowDialog} style={{ width: '50vw' }} onHide={() => setIsShowDialog(false)}>
                     <div className="transaction-detail">
                         <div className="header">
                             <div className="income">
