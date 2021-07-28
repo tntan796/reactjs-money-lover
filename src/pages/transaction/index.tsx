@@ -1,26 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import HeaderComponent from '../../components/header';
 import './index.scss';
 import { Dialog } from 'primereact/dialog';
 import { Calendar } from 'primereact/calendar';
 import TransactionRightHeader from '../../components/transaction/right-header';
 import { Button } from 'primereact/button';
-
+import CustomDropdown from '../../components/custom-dropdown';
+import DataDropdownItem from '../../models/dropdown-item.model';
+import { Link } from 'react-router-dom';
 function TransactionPage() {
 
     const [isShowDetail, setIsShowDetail] = useState(false)
     const [isShowAdd, setIsShowAdd] = useState(false);
-    const [isShowWallet, setIsShowWallet] = useState(false);
+    const [wallets, setWallets] = useState<DataDropdownItem[]>([]);
+    const [selectedWallet, setSelectedWallet] = useState(null);
 
     const addTransaction = () => {
         setIsShowAdd(true);
     }
 
+    useEffect(() => {
+        setWallets(
+            [
+                { Id: 0, Name: 'Tiền cũ', Icon: 'wallet.png', Description: '025' },
+                { Id: 1, Name: 'Tiền của Tano', Icon: 'wallet.png', Description: '54687'}
+            ]
+        );
+    }, []);
+
+
     return (
         <>
             <HeaderComponent
-                center = {null}
-                right = {<TransactionRightHeader addTransaction = {() => addTransaction()}/>}
+                center={null}
+                right={<TransactionRightHeader addTransaction={() => addTransaction()} />}
             ></HeaderComponent>
 
             <div className="transaction">
@@ -45,7 +58,9 @@ function TransactionPage() {
                         </div>
                     </div>
                     <div className="view-report">
-                        Xem báo cáo cho giai đoạn này
+                        <Link to = "/report">
+                            Xem báo cáo cho giai đoạn này
+                        </Link>
                     </div>
                     <div className="transaction-list">
                         <div className="transaction-item" onClick={() => setIsShowDetail(true)}>
@@ -163,61 +178,38 @@ function TransactionPage() {
                 </div>
             </div>
 
-            <Dialog header="Chọn ví" visible={isShowWallet} style={{ width: '50vw' }} onHide={() => setIsShowWallet(false)}>
-                <div className="choose-wallet">
-                    <div className="wallet-title">Tính vào tổng</div>
-                    <div className="wallet">
-                        <div className="wallet-detail" onClick = {() => {setIsShowWallet(false); }}>
-                            <img src="./assets/items/icon_2.png" alt="icon_2"/>
-                            <div>
-                                <div className="wallet-name">Tiền cũ</div>
-                                <div className="wallet-money">0</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="wallet-title">Tính vào tổng</div>
-                    <div className="wallet">
-                        <div className="wallet-detail" onClick = {() => {setIsShowWallet(false); }}>
-                            <img src="./assets/items/icon_2.png" alt="icon_2" />
-                            <div>
-                                <div className="wallet-name">Tiền của Tano</div>
-                                <div className="wallet-money">54654562</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Dialog>
-
             <Dialog header="Thêm mới giao dịch" visible={isShowAdd} style={{ width: '80vw' }} onHide={() => setIsShowAdd(false)}>
                 <div className="transaction-form">
                     <div className="add-transaction">
                         <form>
                             <div className="p-grid">
                                 <div className="p-sm-12 p-md-4">
-                                    <div className="dropdown">
-                                        <div className="dropdown-menu" onClick = {() => setIsShowWallet(true)}>
-                                            <label className="dropdown-title">Ví</label>
-                                            <div className="dropdown-item">
-                                                <img className="dropdown-item--icon" src="../../assets/items/icon_2.png" alt="icon" />
-                                                <div className="dropdown-item--text">
-                                                    <label>Tiền của Tano</label>
-                                                    <img src="../../assets/right-chevron.svg" alt="" className="icon-chevron" />
-                                                </div>
-                                            </div>
+                                    <div className="form-input-group">
+                                        <label>Ví</label>
+                                        <div className="select-item">
+                                            <CustomDropdown
+                                                value = {selectedWallet}
+                                                options = {wallets}
+                                                action = {setSelectedWallet}
+                                                filterBy = "Name"
+                                                optionLabel = "Name"
+                                                placeholder = "Chọn ví"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="p-sm-12 p-md-4">
-                                    <div className="dropdown">
-                                        <div className="dropdown-menu" onClick = {() => setIsShowWallet(true)}>
-                                            <label className="dropdown-title">Nhóm</label>
-                                            <div className="dropdown-item">
-                                                <img className="dropdown-item--icon" src="../../assets/items/icon_5.png" alt="icon" />
-                                                <div className="dropdown-item--text">
-                                                    <label>Tiền của Tano</label>
-                                                    <img src="../../assets/right-chevron.svg" alt="" className="icon-chevron" />
-                                                </div>
-                                            </div>
+                                    <div className="form-input-group">
+                                        <label>Nhóm</label>
+                                        <div className="select-item">
+                                            <CustomDropdown
+                                                value = {selectedWallet}
+                                                options = {wallets}
+                                                action = {setSelectedWallet}
+                                                filterBy = "Name"
+                                                optionLabel = "Name"
+                                                placeholder = "Chọn ví"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +225,7 @@ function TransactionPage() {
                                     <div className="form-input-group">
                                         <label>Ngày</label>
                                         <div className="select-item">
-                                            <Calendar id="icon" style={{ width: '100%' }} />
+                                            <Calendar id="icon" style={{ width: '100%' }} placeholder = "Chọn ngày"/>
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +241,7 @@ function TransactionPage() {
                                 </div>
                             </div>
                             <div className="p-grid">
-                                <div className = "p-sm-12">
+                                <div className="p-sm-12">
                                     <span>Thêm chi tiết</span>
                                 </div>
                             </div>
@@ -281,16 +273,10 @@ function TransactionPage() {
                                             </div>
                                         </div>
                                         <div className="p-sm-12 p-md-6">
-                                            <div className="dropdown">
-                                                <div className="dropdown-menu" onClick = {() => setIsShowWallet(true)}>
-                                                    <label className="dropdown-title">Sự kiện</label>
-                                                    <div className="dropdown-item">
-                                                        <img className="dropdown-item--icon" src="../../assets/items/icon_8.png" alt="icon" />
-                                                        <div className="dropdown-item--text">
-                                                            <label>Tiền của Tano</label>
-                                                            <img src="../../assets/right-chevron.svg" alt="" className="icon-chevron" />
-                                                        </div>
-                                                    </div>
+                                        <div className="form-input-group">
+                                                <label>Sự kiện</label>
+                                                <div className="select-item">
+                                                    <input type="text" placeholder="Sự kiện" />
                                                 </div>
                                             </div>
                                         </div>
