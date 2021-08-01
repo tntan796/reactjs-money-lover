@@ -4,7 +4,7 @@ import FilterModel from "../models/filter.model";
 class PackageService {
 
   getPackages(query: FilterModel = new FilterModel()) {
-    return axiosInstance.get(`${CONSTANTS.BASE_API}/api/Package?filter=${query.filter}offSet=${query.offSet}&pageSize=${query.pageSize}`)
+    return axiosInstance.get(`${CONSTANTS.BASE_API}/api/Package?filter=${query.filter}&offSet=${query.offSet}&pageSize=${query.pageSize}`)
   }
 }
 
