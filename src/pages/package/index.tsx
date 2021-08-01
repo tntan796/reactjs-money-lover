@@ -31,15 +31,6 @@ function PackagePage() {
         });
     }
 
-    useEffect(() => {
-        setWallets(
-            [
-                { Id: 0, Name: 'Tiền cũ', Icon: 'wallet.png', Description: '025' },
-                { Id: 1, Name: 'Tiền của Tano', Icon: 'wallet.png', Description: '54687' }
-            ]
-        );
-    })
-
     const fetchData = () => {
         packageService.getPackages().then(response => {
             const data = convertToTree(response.data.Data.Data);
@@ -50,6 +41,13 @@ function PackagePage() {
     }
 
     useEffect(() => {
+        setWallets(
+            [
+                { Id: 0, Name: 'Tiền cũ', Icon: 'wallet.png', Description: '025' },
+                { Id: 1, Name: 'Tiền của Tano', Icon: 'wallet.png', Description: '54687' }
+            ]
+        );
+
         fetchData();
     }, [])
 
@@ -149,7 +147,7 @@ function PackagePage() {
                         </div>
                         <div className="p-col-3">
                             <div className="icon-wrapper group" onClick={() => { setIsChooseIcon(true); setField('Icon') }}>
-                                <img src={`./assets/${packageModel.Icon}`} alt={packageModel.Id + ""} className="icon" />
+                                <img src={`./assets/${packageModel.Icon || 'wallet.svg'}`} alt={packageModel.Id + ""} className="icon" />
                                 <img src="./assets/right-chevron.svg" alt="icon" className="chevron-right" />
                             </div>
                         </div>
@@ -184,7 +182,7 @@ function PackagePage() {
                                         action={setSelectedWallet}
                                         filterBy="Name"
                                         optionLabel="Name"
-                                        placeholder="Chọn ví"
+                                        placeholder="Chọn nhóm"
                                     />
                                 </div>
                             </div>
