@@ -11,6 +11,7 @@ import packageService from '../../services/package.service';
 import { Toast } from 'primereact/toast';
 import CustomDropdown from '../../components/custom-dropdown';
 import DataDropdownItem from '../../models/dropdown-item.model';
+import FilterModel from '../../models/filter.model';
 
 function PackagePage() {
 
@@ -31,15 +32,6 @@ function PackagePage() {
         });
     }
 
-    const fetchData = () => {
-        packageService.getPackages().then(response => {
-            const data = convertToTree(response.data.Data.Data);
-            setPackageList(data);
-        }).catch(error => {
-            toast.current.show({ severity: 'error', summary: 'Error', detail: error });
-        });
-    }
-
     useEffect(() => {
         setWallets(
             [
@@ -47,9 +39,19 @@ function PackagePage() {
                 { Id: 1, Name: 'Tiền của Tano', Icon: 'wallet.png', Description: '54687' }
             ]
         );
-
         fetchData();
     }, [])
+
+    const fetchData = () => {
+        let filterModel =  new FilterModel();
+        filterModel.pageSize = 500;
+        packageService.getPackages(filterModel).then(response => {
+            const data = convertToTree(response.data.Data.Data);
+            setPackageList(data);
+        }).catch(error => {
+            toast.current.show({ severity: 'error', summary: 'Error', detail: error });
+        });
+    }
 
     const chooseIcon = (value: string) => {
         setPackageModel({ ...packageModel, [field]: value })
@@ -63,19 +65,41 @@ function PackagePage() {
 
     const selectedItem = (pack: PackageModel) => {
         setPackageModel(pack);
+        console.log('pack:', pack);
+        
+        setIsShowDetail(true);
     }
 
-    const packageElms = packageList.map(pack => (
-        <div className="package-parent">
-            <div className="package-parent-item" onClick={() => setIsShowDetail(true)}>
-                <img src={`./assets/${pack.Icon}`} alt={pack.Id + ""} />
+    const packageIncomeElms = packageList.filter(t => t.IsIncome == true).map(pack => (
+        <div className="package-parent" key = {pack.Id}>
+            <div className="package-parent-item" onClick={() => selectedItem(pack)}>
+                <img src={`./assets/items/${pack.Icon}`} alt="icon" />
                 <p>{pack?.Name}</p>
             </div>
             <div className="package-child-list">
                 {
                     pack.Childs.map(subPack => (
-                        <div className="package-child-item" onClick={() => setIsShowDetail(true)}>
-                            <img src={`./assets/${subPack.Icon}`} alt={subPack.Id + ""} />
+                        <div className="package-child-item"  key = {subPack.Id} onClick={() => selectedItem(subPack)}>
+                            <img src={`./assets/items/${subPack.Icon}`} alt="icon" />
+                            <p>{subPack?.Name}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    ));
+
+    const packageOutcomeElms = packageList.filter(t => t.IsIncome == false).map(pack => (
+        <div className="package-parent" key = {pack.Id}>
+            <div className="package-parent-item" onClick={() => selectedItem(pack)}>
+                <img src={`./assets/items/${pack.Icon}`} alt="icon" />
+                <p>{pack?.Name}</p>
+            </div>
+            <div className="package-child-list">
+                {
+                    pack.Childs.map(subPack => (
+                        <div className="package-child-item" key = {subPack.Id} onClick={() => selectedItem(subPack)}>
+                            <img src={`./assets/items/${subPack.Icon}`} alt="icon" />
                             <p>{subPack?.Name}</p>
                         </div>
                     ))
@@ -99,10 +123,15 @@ function PackagePage() {
                     <div className="package-group">
                         <p className="title">Khoản chi</p>
                         <div className="package-list">
-                            {packageElms}
+                            {packageIncomeElms}
+                        </div>
+                        <p className="title">Khoản thu</p>
+                        <div className="package-list">
+                            {packageOutcomeElms}
                         </div>
                     </div>
                 </div>
+
                 <div className={isShowDetail ? "package-right active" : "package-right"}>
                     <div className="package-detail">
                         <div className="header">
@@ -118,11 +147,15 @@ function PackagePage() {
                             </div>
                         </div>
                         <div className="detail-content">
-                            <img src="./assets/items/icon_34.png" alt="icon5" />
+                            <img src={`./assets/items/${packageModel?.Icon}`} alt="icon" />
                             <div>
-                                <div className="title">Ăn uống</div>
+                                <div className="title">{packageModel.Name}</div>
                                 <div className="wallet-name">Tiền của Tano</div>
-                                <Badge value="Khoản chi" severity="danger">Khoản chi</Badge>
+                                {
+                                    packageModel?.IsIncome ? 
+                                    <Badge value="Khoản chi" severity="danger">Khoản chi</Badge> : 
+                                    <Badge value="Khoản thu" severity="default">Khoản thu</Badge>
+                                }
                             </div>
                         </div>
                         <div className="package-group" onClick={() => setIsEditPackage(true)}>
@@ -131,23 +164,29 @@ function PackagePage() {
                     </div>
                 </div>
             </div>
-
             <Dialog header="Nhóm" visible={isEditPackage} style={{ width: '50vw' }} onHide={() => setIsEditPackage(false)}>
                 <div className="edit-package">
                     <div className="p-grid">
                         <div className="p-col-12">
                             <span>
-                                <RadioButton inputId="income" name="IsIncome" value={true} onChange={(e) => setPackageModel({ ...packageModel, IsIncome: false })} checked={packageModel.IsIncome} />
+                                <RadioButton inputId="income"
+                                    name="IsIncome"
+                                    value={true}
+                                    onChange={(e) => setPackageModel({ ...packageModel, IsIncome: false })}
+                                    checked={packageModel.IsIncome} />
                                 <label htmlFor="income"> Khoản thu</label>
                             </span>
                             <span className="p-ml-2">
-                                <RadioButton inputId="outcome" name="IsIncome" value={false} onChange={(e) => setPackageModel({ ...packageModel, IsIncome: false })} checked={!packageModel.IsIncome} />
+                                <RadioButton inputId="outcome"
+                                name="IsIncome" value={false}
+                                onChange={(e) => setPackageModel({ ...packageModel, IsIncome: false })}
+                                checked={!packageModel.IsIncome} />
                                 <label htmlFor="outcome"> Khoản chi</label>
                             </span>
                         </div>
                         <div className="p-col-3">
                             <div className="icon-wrapper group" onClick={() => { setIsChooseIcon(true); setField('Icon') }}>
-                                <img src={`./assets/${packageModel.Icon || 'wallet.svg'}`} alt={packageModel.Id + ""} className="icon" />
+                                <img src={`./assets/${packageModel.Icon}`} alt={packageModel.Id + ""} className="icon" />
                                 <img src="./assets/right-chevron.svg" alt="icon" className="chevron-right" />
                             </div>
                         </div>
@@ -182,7 +221,7 @@ function PackagePage() {
                                         action={setSelectedWallet}
                                         filterBy="Name"
                                         optionLabel="Name"
-                                        placeholder="Chọn nhóm"
+                                        placeholder="Chọn ví"
                                     />
                                 </div>
                             </div>

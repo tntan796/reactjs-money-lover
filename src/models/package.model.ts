@@ -1,8 +1,10 @@
 export default class PackageModel {
-   Id: number = 0;
+   Id: string = '';
    Name: string = '';
    Icon: string = '';
-   ParentId: number = 0;
+   ParentId: string = "";
    IsIncome: boolean = true;
+   WalletId: string = '';
+   AccountId: string = '';
    Childs: PackageModel[] = [];
 }
