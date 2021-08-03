@@ -3,7 +3,7 @@ import CONSTANTS from "../common/constants";
 class AuthService {
 
   login(Username: string, Password: string) {
-    return axios.post(CONSTANTS.BASE_API + "/authenticate", { Username, Password });
+    return axios.post(CONSTANTS.BASE_API + "/Authentication/authenticate", { Username, Password });
   }
 
   logout() {

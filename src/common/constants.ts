@@ -1,5 +1,5 @@
 const CONSTANTS = {
-    BASE_API: 'https://lovermoneyapi.somee.com',
+    BASE_API: 'https://lovermoneyapi.somee.com/api',
     // BASE_API: 'https://localhost:44311/api',
     TOKEN: 'token',
     USER_NAME: 'user name',
